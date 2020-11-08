@@ -61,4 +61,17 @@ sudo make check
 
 sudo make install
 
+cd /data
+
+#Build netCDF Fortran
+wget https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-fortran-4.5.3.tar.gz
+tar -xvf netcdf-fortran-4.5.3.tar.gz
+cd netcdf-fortran-4.5.3
+NFDIR=/usr/local
+sudo CPPFLAGS=-I${NCDIR}/include LDFLAGS=-L${NCDIR}/lib ./configure --prefix=${NFDIR}
+sudo make check
+sudo make install
+cd ..
+
+
 echo "CESM DONE"
