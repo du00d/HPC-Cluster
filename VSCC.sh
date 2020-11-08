@@ -17,12 +17,17 @@ echo "HPL DONE"
 
 echo "###### CESM #######"
 
+sudo yum install "perl(XML::LibXML)" -y
+
 cd /data
 
 wget http://www.zlib.net/zlib-1.2.11.tar.gz
 wget https://support.hdfgroup.org/ftp/HDF5/prev-releases/hdf5-1.12/hdf5-1.12.0/src/hdf5-1.12.0.tar.gz
 wget https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-c-4.7.4.tar.gz
+wget https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-fortran-4.5.3.tar.gz
 
+tar -xvf netcdf-fortran-4.5.3.tar.gz
+rm netcdf-fortran-4.5.3.tar.gz
 tar -xvf zlib-1.2.11.tar.gz
 rm zlib.1.2.11.tar.gz
 tar -xvf hdf5-1.12.0.tar.gz
@@ -63,8 +68,6 @@ sudo make install
 cd /data
 
 #Build netCDF Fortran
-wget https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-fortran-4.5.3.tar.gz
-tar -xvf netcdf-fortran-4.5.3.tar.gz
 cd /data/netcdf-fortran-4.5.3
 NFDIR=/usr/local
 sudo CPPFLAGS=-I${NCDIR}/include LDFLAGS=-L${NCDIR}/lib ./configure --prefix=${NFDIR}
@@ -72,9 +75,9 @@ sudo make check
 sudo make install
 
 #General weirdness and dependencies
-sudo yum-config-manager --enable epel
-sudo yum install netcdf-devel
-sudo yum install cmake
-sudo yum install netcdf-fortran-devel.x86_64
+sudo yum-config-manager --enable epel -y
+sudo yum install netcdf-devel -y
+sudo yum install cmake -y
+sudo yum install netcdf-fortran-devel.x86_64 -y
 
 echo "CESM DONE"
