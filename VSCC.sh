@@ -37,18 +37,17 @@ ZDIR=/usr/local
 sudo ./configure --prefix=${ZDIR}
 sudo make check
 sudo make install
-cd ..
 
 #Build HDF5
 
-cd hdf5-1.12.0/
+cd /data/hdf5-1.12.0/
 H5DIR=/usr/local
 sudo ./configure --with-zlib=${ZDIR} --prefix=${H5DIR} --enable-hl
 sudo make check
 sudo make install
 
 #Build netCDF
-cd netcdf-c-4.7.4
+cd /data/netcdf-c-4.7.4
 NCDIR=/usr/local
 sudo CPPFLAGS='-I${H5DIR}/include -I${ZDIR}/include' LDFLAGS='-L${H5DIR}/lib -L${ZDIR}/lib' ./configure --prefix=${NCDIR} --disable-dap
 LD_LIBRARY_PATH=/usr/local/lib
@@ -66,12 +65,16 @@ cd /data
 #Build netCDF Fortran
 wget https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-fortran-4.5.3.tar.gz
 tar -xvf netcdf-fortran-4.5.3.tar.gz
-cd netcdf-fortran-4.5.3
+cd /data/netcdf-fortran-4.5.3
 NFDIR=/usr/local
 sudo CPPFLAGS=-I${NCDIR}/include LDFLAGS=-L${NCDIR}/lib ./configure --prefix=${NFDIR}
 sudo make check
 sudo make install
-cd ..
 
+#General weirdness and dependencies
+sudo yum-config-manager --enable epel
+sudo yum install netcdf-devel
+sudo yum install cmake
+sudo yum install netcdf-fortran-devel.x86_64
 
 echo "CESM DONE"
