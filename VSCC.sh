@@ -1,7 +1,7 @@
 #!/bin/bash
 
-mv * ../
-cd ../
+mv * /data
+cd /data
 echo "INSTALLATION BEGINS"
 echo "####### HPL #######"
 
