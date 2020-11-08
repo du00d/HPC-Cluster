@@ -67,7 +67,7 @@ ARCH         = Linux_AMD_BLIS
 # - HPL Directory Structure / HPL library ------------------------------
 # ----------------------------------------------------------------------
 #
-TOPdir       = /data/hpl
+TOPdir       = /data/hpl-2.3
 INCdir       = $(TOPdir)/include
 BINdir       = $(TOPdir)/bin/$(ARCH)
 LIBdir       = $(TOPdir)/lib/$(ARCH)
