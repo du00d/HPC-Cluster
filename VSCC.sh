@@ -3,6 +3,20 @@
 mv * /data
 cd /data
 echo "INSTALLATION BEGINS"
+
+#install cuda 11.0
+sudo yum -y install yum-utils
+sudo yum-config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-rhel7.repo
+sudo yum install cuda-11.0.1-1.x86_64
+
+touch /etc/profile.d/cuda110.sh
+export PATH=/usr/local/cuda-11.0/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-11.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+source /etc/profile.d/cuda110.sh
+
+echo "####### HPCG ######"
+wget http://www.hpcg-benchmark.org/downloads/xhpcg-3.1_cuda-11_ompi-4.0_sm_60_sm70_sm80
+
 echo "####### HPL #######"
 
 wget https://www.netlib.org/benchmark/hpl/hpl-2.3.tar.gz
